@@ -16,3 +16,5 @@ spec:
       expose: true
       name: all
       protocols: all
+      sslEnabled: true
+      sslSecret: my-tls-secret

@@ -13,11 +13,10 @@
    3. ```keytool -import -alias broker -keystore ~/client.ts -file ~/broker_cert.pem```
    4. ```oc create secret -n my-broker generic my-tls-secret --from-file=broker.ks=~/broker.ks --from-file=client.ts=~/client.ts --from-literal=keyStorePassword=<password> --from-literal=trustStorePassword=<password>```
 4. Criar Broker: ```oc apply -n my-broker -f files/artemis/my_cluster.yaml```
-   1. Como acessar Console: Admin -> Networking -> Route: Acessar rota que contém no nome: wconsj
-      1. Lembre que está como http, não https
-      2. Secret `artemis-broker-tls-credentials-secret`:
-         1.  user: <AMQ_CLUSTER_USER>
-         2.  pass: <AMQ_CLUSTER_PASSWORD
+   1. URL da console: ```oc get secret artemis-broker-tls-credentials-secret -n my-broker -o go-template --template="{{.data.AMQ_CLUSTER_USER|base64decode}}"```
+      1. Secret `artemis-broker-tls-credentials-secret`:
+         1.  user: ```oc get secret artemis-broker-tls-credentials-secret -n my-broker -o go-template --template="{{.data.AMQ_CLUSTER_USER|base64decode}}"```
+         2.  pass: ```oc get secret artemis-broker-tls-credentials-secret -n my-broker -o go-template --template="{{.data.AMQ_CLUSTER_PASSWORD|base64decode}}"```
 5.  Criar o address utilizando arquivo: ```files/address/address_queue.yaml```
 6.  O código de exemplo para enviar/receber a documentação está na pasta `qpid-jms-examples`
     1.  Atualizar o arquivo `jndi.properties`, linha 26, como caminho do arquivo `client.ts` gerado anteriormente

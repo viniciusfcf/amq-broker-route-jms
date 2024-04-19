@@ -1,5 +1,9 @@
 # amq-broker-route-jms
 
+# Pré requisitos
+1. Openshift >=4.11.36
+2. Java >= 11
+
 # Passo a passo
 1. Instalar o Operador "Red Hat Integration - AMQ Broker for RHEL 8 (Multiarch)"
 2. Criar project/namespace "my-broker"

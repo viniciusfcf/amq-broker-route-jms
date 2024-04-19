@@ -12,7 +12,7 @@
    2. ```keytool -export -alias broker -keystore ~/broker.ks -file ~/broker_cert.pem```
    3. ```keytool -import -alias broker -keystore ~/client.ts -file ~/broker_cert.pem```
    4. ```oc create secret -n my-broker generic my-tls-secret --from-file=broker.ks=~/broker.ks --from-file=client.ts=~/client.ts --from-literal=keyStorePassword=<password> --from-literal=trustStorePassword=<password>```
-4. Criar Broker utilizando arquivo: ```files/artemis/my_cluster.yaml```
+4. Criar Broker: ```oc apply -n my-broker -f files/artemis/my_cluster.yaml```
    1. Como acessar Console: Admin -> Networking -> Route: Acessar rota que contém no nome: wconsj
       1. Lembre que está como http, não https
       2. Secret `artemis-broker-tls-credentials-secret`:
